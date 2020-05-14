@@ -1,4 +1,4 @@
-import 'package:delifood/category_meals_screen.dart';
+import 'package:delifood/screens/category_meals_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
