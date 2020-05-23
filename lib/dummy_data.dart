@@ -381,7 +381,7 @@ const DUMMY_MEALS = const [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg',
+        'https://www.bbcgoodfood.com/sites/default/files/recipe_images/asparagus.jpg',
     duration: 30,
     ingredients: [
       'White and Green Asparagus',

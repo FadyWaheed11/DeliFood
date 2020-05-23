@@ -20,7 +20,10 @@ class MealItem extends StatelessWidget {
   });
 
   void selectMeal(BuildContext context) {
-    Navigator.pushNamed(context, MealDetailScreen.routeName , arguments: id);
+    Navigator.pushNamed(context, MealDetailScreen.routeName, arguments: id)
+        .then((result) {
+      print(result);
+    });
   }
 
   String get complexityText {

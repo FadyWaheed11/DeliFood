@@ -3,14 +3,10 @@ import '../dummy_data.dart';
 import '../widgets/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  static const routeName = 'home';
+  static const routeName = '/categories-screen';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('DeliFood'),
-      ),
-      body: GridView(
+    return  GridView(
         padding: const EdgeInsets.all(15.0),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200.0,
@@ -20,7 +16,6 @@ class CategoriesScreen extends StatelessWidget {
           ),
           children: DUMMY_CATEGORIES
               .map((item) => CategoryItem(item.title, item.color,item.id))
-              .toList()),
-    );
+              .toList());
   }
 }
