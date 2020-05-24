@@ -23,26 +23,45 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false,
   };
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
   void _setFilters(Map<String, bool> saveFilters) {
     setState(() {
       _filters = saveFilters;
-      _availableMeals = DUMMY_MEALS.where((meal){
-        if(_filters['gluten'] && !meal.isGlutenFree){
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_filters['gluten'] && !meal.isGlutenFree) {
           return false;
         }
-        if(_filters['lactose'] && !meal.isLactoseFree){
+        if (_filters['lactose'] && !meal.isLactoseFree) {
           return false;
         }
-        if(_filters['vegan'] && !meal.isVegan){
+        if (_filters['vegan'] && !meal.isVegan) {
           return false;
         }
-        if(_filters['vegetarian'] && !meal.isVegetarian){
+        if (_filters['vegetarian'] && !meal.isVegetarian) {
           return false;
         }
         return true;
       }).toList();
     });
+  }
+
+  void _toggleFavorites(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
+    }
+  }
+
+  bool _isFavoriteMeal(String id) {
+    return _favoriteMeals.any((meal) => meal.id == id);
   }
 
   @override
@@ -67,11 +86,12 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       initialRoute: TabsScreen.routeName,
       routes: {
-        TabsScreen.routeName: (ctx) => TabsScreen(),
+        TabsScreen.routeName: (ctx) => TabsScreen(_favoriteMeals),
         CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(_availableMeals),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-        FilterScreen.routeName: (ctx) => FilterScreen(_filters,_setFilters),
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(_availableMeals),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(_toggleFavorites,_isFavoriteMeal),
+        FilterScreen.routeName: (ctx) => FilterScreen(_filters, _setFilters),
       },
     );
   }

@@ -81,7 +81,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 });
               }),
               _buildSwitchListTile('Vegetarian-free',
-                  'Only include gluten-free meals.', _vegetarianFree, (newValue) {
+                  'Only include Vegetarian-free meals.', _vegetarianFree, (newValue) {
                 setState(() {
                   _vegetarianFree = newValue;
                 });
